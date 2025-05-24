@@ -6,6 +6,8 @@ import validarDadosEmpresa from '../../validators/EmpresaValidator.js'
 
 export const loginEmpresa = async (req, res) => {
   const { email, senha } = req.body;
+  console.log('req.body:', req.body);
+
     
     if (!email || !senha) {
     return res.status(400).json({ error: "Email e senha são obrigatórios" });
@@ -34,9 +36,12 @@ export const loginEmpresa = async (req, res) => {
       path: "/",
     });
 
-
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    console.log("Token gerado:", token);
     res.status(200).json({
-      mensagem: "Login realizado com sucesso"});
+      mensagem: "Login realizado com sucesso",
+      token
+    });
 
   } catch (error) {
     res.status(500).json({ error: "Erro ao fazer login: " + error.message });

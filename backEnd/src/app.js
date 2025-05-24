@@ -6,6 +6,7 @@ import clienteRoutes from './routes/clienteRoutes.js';
 import carrinhoRoutes from './routes/carrinhoRoutes.js';
 import lojaRoutes from './routes/lojaRoutes.js';
 import pedidoRoutes from './routes/pedidoRoutes.js';
+import donoRoutes from './routes/donoRoutes.js';
 import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
@@ -77,6 +78,7 @@ app.use(clienteRoutes);
 app.use(pedidoRoutes);
 app.use('/loja', carrinhoRoutes);
 app.use(lojaRoutes);//essa linha fica SEMPRE depois de carrinho. Não remova!!! Dallyla aqui
+app.use(donoRoutes);
 
 app.get('/', (req, res) => {
   res.send('API do Beto Amparo está no ar!');

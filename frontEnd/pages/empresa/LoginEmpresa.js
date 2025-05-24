@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 export default function LoginEmpresa() {
   const initialState = { email: '', senha: '' };
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const router = useRouter();
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -31,8 +33,17 @@ export default function LoginEmpresa() {
         return;
       }
 
+      // SALVAR O TOKEN NO LOCALSTORAGE
+      if (data?.token) {
+        localStorage.setItem('token', data.token);
+      } else {
+        setErrors({ geral: 'Token não recebido da API.' });
+        return;
+      }
+
       alert('Login realizado com sucesso!');
-      window.location.href = 'empresa/personalizar';
+      router.push('/empresa/donoarea');
+
     } catch (err) {
       console.error(err);
       setErrors({ geral: 'Erro ao fazer login. Tente novamente mais tarde.' });
