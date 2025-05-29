@@ -57,6 +57,77 @@ export async function buscarEmpresaPorId(id) {
   return { data }; // Retorna como objeto { data: ..., error: ... } para consistência
 }
 
+export async function buscarEmpresaPorEmail(email) {
+  try {
+    const { data, error } = await supabase
+      .from('empresas')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        return { data: null, error: 'Empresa não encontrada.' };
+      }
+      return { data: null, error: error.message };
+    }
+
+    return { data, error: null };
+  } catch (e) {
+    return { data: null, error: e.message };
+  }
+}
+
+export async function atualizarTokenEmpresa(email, token, expiracao) {
+  const { data, error } = await supabase
+    .from('empresas')
+    .update({
+      token_recuperacao: token,
+      token_expira_em: expiracao,  // campo datetime/timestamp
+    })
+    .eq('email', email);
+
+  if (error) {
+    console.error('Erro ao atualizar token:', error.message);
+    throw new Error('Erro ao salvar o token de recuperação.');
+  }
+
+  return data;
+}
+
+export async function buscarTokenRecuperacao(token) {
+  const { data, error } = await supabase
+    .from('empresas')
+    .select('*')
+    .eq('token_recuperacao', token)
+    .single();
+
+  if (error || !data) return null;
+  return data;
+}
+
+export async function deletarTokenRecuperacao(token) {
+  const { error } = await supabase
+    .from('empresas')
+    .update({
+      token_recuperacao: null,
+      token_expira_em: null,
+    })
+    .eq('token_recuperacao', token);
+
+  if (error) throw error;
+}
+
+
+export async function atualizarSenhaEmpresa(id, senhaHash) {
+  const { error } = await supabase
+    .from('empresas')
+    .update({ senha: senhaHash })
+    .eq('id', id);
+
+  if (error) throw error;
+}
+
 export async function LoginEmpresa(email, senha) {
   // Primeiro, busca a empresa pelo email
   const { data: empresaDataArray, error: selectError } = await supabase

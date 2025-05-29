@@ -7,6 +7,12 @@ import * as EmpresaController from '../controllers/Empresa/EmpresaController.js'
 
 const router = express.Router();
 
+import { enviarEmailRecuperacao } from '../controllers/recuperarSenhaController.js';
+import { definirNovaSenha } from '../controllers/redefinirSenhaController.js';
+
+router.post('/recuperar-senha',enviarEmailRecuperacao);
+router.post('/nova-senha', definirNovaSenha);
+
 router.post('/addEmpresa', AuthController.criarEmpresa);
 router.post('/loginEmpresa', AuthController.loginEmpresa);
 router.get('/logout', AuthController.logout);
