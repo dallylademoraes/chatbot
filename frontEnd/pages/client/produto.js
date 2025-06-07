@@ -215,12 +215,14 @@ export default function Produto() {
 
                 {/* Coluna: Produto e Observação */}
                 <div className="flex-1 p-6 space-y-6 text-gray-800">
-                    <ExibirProduto produto={produto} />
+                    <ExibirProduto produto={produto}
+                    corPrimaria={corPrimaria}  />
 
                     <QuantidadeControl
                         produto={produto}
                         quantidade={quantidade}
                         setQuantidade={setQuantidade}
+                        corPrimaria={corPrimaria} 
                     />
 
                     <Obersevacao produto={produto} />
@@ -231,7 +233,8 @@ export default function Produto() {
                     <Adicionais
                         adicionais={adicionais}
                         selecionados={selecionados}
-                        toggleAdicional={toggleAdicional}
+                        toggleAdicional={toggleAdicional}corPrimaria={corPrimaria} 
+
                     />
 
                     <Carrinho subtotal={subtotal} handleAddToCart={handleAddToCart} />

@@ -21,12 +21,13 @@ export const clientePrivate = async (req, res, next) => {
         return res.status(401).json({ error: "Cliente não encontrado." });
       }
   
-      req.Id = decoded.id;
+      req.ClientId = decoded.id;
       req.user = cliente;
       req.userTipo = decoded.tipo;
   
       next();
     } catch (err) {
+      console.error("Erro ao verificar token do cliente:", err.message);
       return res.status(401).json({ error: "Token inválido ou expirado." });
     }
   };

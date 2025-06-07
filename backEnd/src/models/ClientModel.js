@@ -2,9 +2,9 @@ import supabase from '../config/SupaBase.js';
 
 
 
-export async function buscarEmpresaPorId(id) {
+export async function buscarClientePorId(id) {
     const { data, error } = await supabase
-      .from('empresas')
+      .from('clientes')
       .select('*')
       .eq('id', id)
       .single();

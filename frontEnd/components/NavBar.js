@@ -30,6 +30,14 @@ const NavBar = ({ site, corPrimaria = "#3B82F6" }) => {
         </svg>
         <span>Carrinho</span>
       </Link>
+
+      <Link href={`/loja/${slug}/agendamento`} className="flex flex-col items-center hover:opacity-80">
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10m-12 8h14a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+  <span>Agendamento</span>
+</Link>
+
     </nav>
   );
 };

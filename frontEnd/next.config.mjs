@@ -9,9 +9,14 @@ const nextConfig = {
 
   async rewrites() {
     return [
+
       {
         source: '/loja/produto/:site/:id', // URL personalizada
         destination: '/client/produto', // Arquivo de destino
+      },
+      {
+        source: '/loja/:slug/agendamento', // URL personalizada
+        destination: '/client/agendamento', // Arquivo de destino
       },
       {
         source: '/:slug/carrinho',

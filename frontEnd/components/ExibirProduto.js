@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Produto = ({ produto }) => (
+const Produto = ({ produto , corPrimaria }) => (
   <div className="space-y-4">
 
     <div className="relative ">

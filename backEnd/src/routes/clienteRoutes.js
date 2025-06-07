@@ -4,6 +4,8 @@ import clienteController from '../controllers/client/clienteController.js';
 
 import * as AuthClinteController from "../controllers/client/AuthClinteController.js";
 
+import * as AgendamentoController from"../controllers/client/AgendamentoController.js"
+import { clientePrivate } from '../middleware/protectRouterClient.js'; 
 
 const router = express.Router();
 
@@ -38,5 +40,7 @@ router.post('/login', AuthClinteController.login);
 router.post('/clientes', AuthClinteController.cadastrar); 
 router.get('/clientLogout', AuthClinteController.logout);
 
+router.get('/:slug/Horarios',clientePrivate, AgendamentoController.getHoraririosAgendamentoController);
+router.post('/:slug/agendamento', clientePrivate , AgendamentoController.postAgendamentoController);
 
 export default router;

@@ -71,5 +71,22 @@ export const IntervalosHorarioModel = {
 
     if (error) throw new Error(error.message);
     return { success: true };
+  },
+
+  
+  async updateAvailableStatus  (data_config_id, available, horario) {
+    const { data, error } = await supabase
+      .from('intervalos_horario')
+      .update({ available })
+      .eq('data_config_id', data_config_id)
+      .eq('inicio', horario)
+      .select();
+  
+    if (error) {
+      throw new Error(`Erro ao atualizar disponibilidade: ${error.message}`);
+    }
+    console.log('Intervalos atualizados:', data);
+  
+    return data;
   }
 };
